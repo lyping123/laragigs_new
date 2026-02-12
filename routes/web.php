@@ -1,47 +1,26 @@
 <?php
 
+use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
     return view('listings',[
-        'heading'=>'latest list',
-        'listings'=>[
-            [
-                'id'=>1,
-                'title'=>'Listing One',
-                'description'=>'this is a good thing'
-            ],
-            [
-                'id'=>2,
-                'title'=>'Listing two',
-                'description'=>'this is not a good thing'
-            ]
-        ]
+        "listings"=>Listing::all(),
     ]);
-
 });
 
 
 Route::get('/listing/{id}',function($id){
-      $listings=[
-        [
-            'id'=>1,
-            'title'=>'Listing One',
-            'description'=>'this is a good thing'
-        ],
-        [
-            'id'=>2,
-            'title'=>'Listing two',
-            'description'=>'this is not a good thing'
-        ]];
-
-        foreach($listings as $listing){
-            if($listing['id']==$id){
-                return $listing;
-            }
-        }
+    $listing=Listing::find($id);
+    if($listing){
+        return view('listing',[
+            'listing'=>Listing::find($id)
+        ]);
+    }else{
+        abort("404");
+    } 
 
 });
 

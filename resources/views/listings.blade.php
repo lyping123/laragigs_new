@@ -1,10 +1,9 @@
-<h1>{{  $heading  }}</h1>
 @unless (count($listings)==0)
 
     @foreach($listings as $listing)
         
         <a href="/listing/{{$listing["id"]}}">{{ $listing["title"] }}</a>
-        <li>{{ $listing["description"] }}</li>
+        <li>{{ $listing["desc"] }}</li>
     {{-- <x-listing-card :listing="$listing" /> --}}
 
     @endforeach
