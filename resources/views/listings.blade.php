@@ -3,7 +3,7 @@
     @foreach($listings as $listing)
         
         <a href="/listing/{{$listing["id"]}}">{{ $listing["title"] }}</a>
-        <li>{{ $listing["desc"] }}</li>
+        <li>{{ $listing["description"] }}</li>
     {{-- <x-listing-card :listing="$listing" /> --}}
 
     @endforeach

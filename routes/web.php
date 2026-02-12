@@ -1,22 +1,23 @@
 <?php
 
 use App\Models\Listing;
+use App\Models\listings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
     return view('listings',[
-        "listings"=>Listing::all(),
+        "listings"=>listings::all(),
     ]);
 });
 
 
 Route::get('/listing/{id}',function($id){
-    $listing=Listing::find($id);
+    $listing=listings::find($id);
     if($listing){
         return view('listing',[
-            'listing'=>Listing::find($id)
+            'listing'=>listings::find($id)
         ]);
     }else{
         abort("404");
