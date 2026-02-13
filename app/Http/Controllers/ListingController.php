@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ListingController extends Controller
 {
     public function index(){
-        $listings = listings::latest()->filter(request(['tag','search']))->get();
+        $listings = listings::latest()->filter(request(['tag','search']))->paginate(6);
         return view('listings', [
             "listings" => $listings
         ]);
@@ -39,6 +39,9 @@ class ListingController extends Controller
             'tag'=>'required',
             'description'=>'required'
         ]);
+        if($request->hasFile('logo')){
+            $formFields['logo']=$request->file('logo')->store('logos','public');
+        }
     
 
         listings::create($formFields);

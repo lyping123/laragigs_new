@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class listings extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','company','location','website','email','tag','description'];
+    protected $fillable = ['title','company','location','logo','website','email','tag','description'];
 
     public function scopeFilter($query, array $filters){
         if($filters['tag'] ?? false){
