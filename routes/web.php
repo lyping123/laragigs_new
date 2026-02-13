@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\UserController;
 use App\Models\Listing;
 use App\Models\listings;
 use Illuminate\Http\Request;
@@ -13,6 +14,10 @@ Route::get('/listings/{id}',[ListingController::class,'edit'])->name('editform')
 Route::put('/listings/{id}',[ListingController::class,'update'])->name('listing.update');
 Route::get('/listing/{id}',[ListingController::class,'show'])->name('listinglist');
 Route::delete('/listings/{id}',[ListingController::class,'destroy'])->name('listing.destroy');
+
+
+Route::get("/register",[UserController::class,'create'])->name('register.create');
+Route::post("/users",[UserController::class,'store'])->name('users.store');
 
 
 Route::get("/hello", function(){
