@@ -49,5 +49,39 @@ class ListingController extends Controller
         return redirect('/')->with('message','Listing created successfully!');
     }
 
+    public function edit($id){
+        $listing=listings::findorFail($id);
+        return view('edit',[
+            'listing'=>$listing
+        ]);
+    }
+
+    public function update(Request $request,$id){
+        $listing=listings::findorFail($id);
+
+        $formFields=$request->validate([
+            'title'=>'required',
+            'company'=>['required'],
+            'location'=>'required',
+            'website'=>'required',
+            'email'=>['required'],
+            'tag'=>'required',
+            'description'=>'required'
+        ]);
+        if($request->hasFile('logo')){
+            $formFields['logo']=$request->file('logo')->store('logos','public');
+        }
+    
+        $listing->update($formFields);
+
+        return back()->with('message','Listing updated successfully!');
+    }
+
+    public function destroy($id){
+        $listing=listings::findorFail($id);
+        $listing->delete();
+        return redirect('/')->with('message','Listing deleted successfully!');
+    }
+
     
 }

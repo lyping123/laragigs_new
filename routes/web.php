@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[ListingController::class,'index']);
 Route::get('/listings/create',[ListingController::class,'create'])->name('listing.create');
 Route::post('/listings',[ListingController::class,'store'])->name('listing.store');
-
+Route::get('/listings/{id}',[ListingController::class,'edit'])->name('editform');
+Route::put('/listings/{id}',[ListingController::class,'update'])->name('listing.update');
 Route::get('/listing/{id}',[ListingController::class,'show'])->name('listinglist');
+Route::delete('/listings/{id}',[ListingController::class,'destroy'])->name('listing.destroy');
 
 
 Route::get("/hello", function(){

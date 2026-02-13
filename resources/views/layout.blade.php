@@ -34,6 +34,7 @@
             ><img class="w-24 m-2" src="{{ asset("images/avatar-01-removebg-preview.png") }}" alt="" class="logo"
         /></a>
     </nav>
+    <x-flash-message />
     
     <main id="main">
         @yield('content')
