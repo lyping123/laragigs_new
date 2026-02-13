@@ -20,6 +20,11 @@ Route::get("/register",[UserController::class,'create'])->name('register.create'
 Route::post("/users",[UserController::class,'store'])->name('users.store');
 
 
+Route::get("/login",[UserController::class,'login'])->name('login');
+Route::post("/users/authenticate",[UserController::class,'authenticate'])->name('users.authenticate');
+Route::post("/logout",[UserController::class,'logout'])->name('logout');
+
+
 Route::get("/hello", function(){
     return response("<h1>hello word</h1>",200)
         ->header('content-Type','text/plain');    
