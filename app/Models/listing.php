@@ -14,7 +14,7 @@ class Listing{
                 'title'=>'Listing 4',
                 'desc'=>'this is not a good thing'
             ]
-            ];
+        ];
     }
     public static function find($id){
         $listings=self::all();

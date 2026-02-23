@@ -5,15 +5,23 @@ use App\Http\Controllers\UserController;
 use App\Models\Listing;
 use App\Models\listings;
 use Illuminate\Http\Request;
+use App\Http\Middleware\checkauth;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/',[ListingController::class,'index']);
-Route::get('/listings/create',[ListingController::class,'create'])->name('listing.create')->middleware('checkauth');
-Route::post('/listings',[ListingController::class,'store'])->name('listing.store')->middleware('checkauth');
-Route::get('/listings/{id}',[ListingController::class,'edit'])->name('editform')->middleware('checkauth');
-Route::put('/listings/{id}',[ListingController::class,'update'])->name('listing.update')->middleware('checkauth');
-Route::get('/listing/{id}',[ListingController::class,'show'])->name('listinglist');
-Route::delete('/listings/{id}',[ListingController::class,'destroy'])->name('listing.destroy')->middleware('checkauth');
+
+Route::middleware(checkauth::class)->group(function(){
+    
+    Route::get('/listings/create',[ListingController::class,'create'])->name('listing.create');
+    Route::post('/listings',[ListingController::class,'store'])->name('listing.store');
+    Route::get('/listings/{id}',[ListingController::class,'edit'])->name('editform');
+    Route::get('/listing/{id}',[ListingController::class,'show'])->name('listinglist');
+    Route::put('/listings/{id}',[ListingController::class,'update'])->name('listing.update');
+    Route::delete('/listings/{id}',[ListingController::class,'destroy'])->name('listing.destroy');
+    Route::get('/managelisting',[ListingController::class,'manage'])->name('listing.manage');
+});
+
 
 
 Route::get("/register",[UserController::class,'create'])->name('register.create');
@@ -37,8 +45,7 @@ Route::get("/posts/{id}",function($id){
 
 
 Route::get("/search",function(Request $request){
-    dd($request->name,$request->age);
+    dd($request->name,$request->age,$request->city);
 });
-
 
 
